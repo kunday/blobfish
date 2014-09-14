@@ -5,7 +5,7 @@ set -e
 getent group docker || groupadd docker
 usermod -a -G docker vagrant
 
-pacman -S --noconfirm docker
+pacman -S --noconfirm docker btrfs-progs
 
 cat <<EOF > /usr/lib/systemd/system/docker-tcp.socket
 [Unit]
