@@ -1,4 +1,4 @@
-# localdocker
+# blobfish
 
 This is a Vagrant-based Docker host, for local development.
 
@@ -16,7 +16,7 @@ Type `vagrant up` to bring the VM up.
 
 The VM gets IP address 192.168.66.2.  Any mapped ports should be visible on that address (rather than localhost).  You might also wish to set up an entry in `/etc/hosts`:
 
-    192.168.66.2 localdocker
+    192.168.111.222 blobfish
 
 To communicate with the Docker daemon from your host machine, set:
 

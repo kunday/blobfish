@@ -1,6 +1,6 @@
-hostname localdocker
+hostname blobfish
 
-grep localdocker /etc/hosts || cat >> /etc/hosts <<EOF
+grep blobfish /etc/hosts || cat >> /etc/hosts <<EOF
 
-127.0.0.1 localdocker
+127.0.0.1 blobfish
 EOF
