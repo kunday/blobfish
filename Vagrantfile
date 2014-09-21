@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider "virtualbox" do |vb|
     vb.customize "pre-boot", ['modifyvm', :id, '--cpus', '2']
-    vb.customize "pre-boot", ['modifyvm', :id, '--memory', '2048', '--ioapic', 'on']
+    vb.customize "pre-boot", ['modifyvm', :id, '--memory', '4096', '--ioapic', 'on']
     vb.customize "pre-boot", ['modifyvm', :id, '--uart1', '0x3F8', '4']
     vb.customize "pre-boot", ["modifyvm", :id, "--natdnshostresolver1", "on"]
     vb.customize "pre-boot", ["modifyvm", :id, "--natdnsproxy1", "on"]
