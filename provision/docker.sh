@@ -1,45 +1,19 @@
 #! /bin/sh
 
 set -e
+export DEBIAN_FRONTEND=noninteractive
 
 getent group docker || groupadd docker
 usermod -a -G docker vagrant
 
-pacman -S --noconfirm docker btrfs-progs
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9
+sh -c 'echo deb https://apt.dockerproject.org/repo ubuntu-precise main > /etc/apt/sources.list.d/docker.list'
+apt-get -y -q update
 
-cat <<EOF > /usr/lib/systemd/system/docker-tcp.socket
-[Unit]
-Description=Docker Socket for the API
+apt-get -y -q --force-yes install docker-engine
+apt-get -y -q --force-yes install btrfs-tools
 
-[Socket]
-ListenStream=4243
-Service=docker.service
-BindIPv6Only=both
-
-[Install]
-WantedBy=sockets.target
-EOF
-
-cat <<EOF > /usr/lib/systemd/system/enable-docker-tcp.service
-[Unit]
-Description=Enable the Docker Socket for the API
-After=docker.service
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/systemctl enable docker-tcp.socket
-ExecStartPost=/usr/bin/systemctl stop docker.socket docker
-ExecStartPost=/usr/bin/systemctl start docker-tcp.socket docker.socket
-ExecStartPost=/usr/bin/systemctl start docker
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-sudo systemctl enable docker-tcp.socket
-sudo systemctl stop docker.socket docker
-sudo systemctl start docker-tcp.socket docker.socket
-sudo systemctl stop docker
+service docker restart
 
 cat <<EOF > /etc/logrotate.d/docker
 /var/lib/docker/containers/*/*-json.log {
