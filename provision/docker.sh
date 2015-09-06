@@ -26,10 +26,7 @@ cat <<EOF > /etc/logrotate.d/docker
 }
 EOF
 
-echo "Installing curl"
-sudo apt-get install -qqy curl
-
 echo "Installing docker-compose..."
-rm /usr/local/bin/docker-compose
-curl -L https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+rm -rf /usr/local/bin/docker-compose
+wget -o /usr/local/bin/docker-compose https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m`
 chmod +x /usr/local/bin/docker-compose
