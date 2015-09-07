@@ -28,5 +28,5 @@ EOF
 
 echo "Installing docker-compose..."
 rm -rf /usr/local/bin/docker-compose
-wget -o /usr/local/bin/docker-compose https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m`
+sudo wget --output-document=/usr/local/bin/docker-compose https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m`
 chmod +x /usr/local/bin/docker-compose
