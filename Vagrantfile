@@ -18,5 +18,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, :path => "provision/ruby.sh"
   config.vm.provision :shell, :path => "provision/docker.sh"
   config.vm.provision :shell, :path => "provision/packages.sh"
+  config.vm.provision :shell, :path => "provision/compiler_packages.sh"
 
 end
